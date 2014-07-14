@@ -36,15 +36,20 @@
 				<p>	<%= f.label :comment %> </p>
 				<p>	<%= f.text_field :body, autocomplete: false, class: "form-control" %> </p>
 				<p> <%= f.submit "Save", class: "btn btn-primary" %> </p>
-			<% end %>	
-	    <% end %>
-	    <!-- <button id= "comment-button" class="comment-button btn btn-default">Comment</button> -->
-	    <button class="comment-button btn btn-default">Comment</button>
-	</div>
-	
-	<br>
+
+				<br>
 	<b class="text-primary">Comments:</b>
 	<% activity.comments.each do |c| %>
-		<p class="text-danger"><%= c.body %></p>
-	<% end %>
+		<p class="text-danger"><%= c.body %></p>  
+		
+	     <% end %>
+	          <% end %>	
+	 <% end %>
+	    <!-- <button id= "comment-button" class="comment-button btn btn-default">Comment</button> -->
+	    <button class="comment-button btn btn-default">Show Comments</button>
+	    
+	    <p class="text-danger"><%= activity.comments.count %>comments</p>
+	</div>
+
+	
 <% end %>
