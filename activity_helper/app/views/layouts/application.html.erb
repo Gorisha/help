@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Activity</title>
+  <%= stylesheet_link_tag "application", media: "all" %>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <%= javascript_include_tag 'application' %>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <%= render partial: "layouts/header" %>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  
+    <div class="container">
+      <%= yield %>
+    </div>
+</body>
+</html>

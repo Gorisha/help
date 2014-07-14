@@ -1,0 +1,31 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+table, th, td {
+   border: 1px solid black;
+}table {
+    width: 50%;
+}
+table {
+    border-collapse: collapse;
+}
+
+th {
+    height: 70px;
+
+    }
+    td {
+    padding: 5px;
+}
+table, td, th {
+    border: 1px solid green;
+}
+
+th {
+    background-color: green;
+    color: white;
+}
+ h1
+ {
+ text-align:center
+ }

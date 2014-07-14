@@ -1,0 +1,15 @@
+<div class="container">
+	<div class="row card">
+		<div class="col-md-6">
+			<%= form_for :comment , url: user_activity_comments_path(@user , @activity) do |f| %>
+			  	<div class="form-group">
+			  		<%= f.label :comment %>
+			    	<%= f.text_field :body, autocomplete: false, class: "form-control" %>
+			  	</div>
+				
+			    <%= f.submit "Save", class: "btn btn-primary" %>
+			  
+			<% end %>	
+		</div>
+	</div>
+</div>
