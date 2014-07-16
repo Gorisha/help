@@ -10,6 +10,22 @@
 					<%= f.label :description %>
 			    	<%= f.text_area :description, class: "form-control" %>
 				</div>
+				<div class="form-group">
+					<p>
+						Upload Avatar
+    					<%= f.file_field :avatar %>
+  					</p>
+  					<p>
+  						Add Video Embed URL
+  						<%= f.text_field :video, class: "form-control" %>
+  					</p>	
+  					<p>
+  						Address
+  						<%= f.text_field :address, class: "form-control add-location" %>
+  						<%= f.hidden_field :latitude, id: "llat" %>
+  						<%= f.hidden_field :longitude, id: "llng" %>
+  					</p>
+  				</div>
 			    <%= f.submit "Save", class: "btn btn-primary" %>
 			  
 			<% end %>	

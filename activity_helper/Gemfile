@@ -13,7 +13,7 @@ gem 'uglifier'
 gem 'sass-rails'
 gem 'bootstrap-sass'
 gem 'sprockets'
-
+gem 'carrierwave'
 
 
 # group :assets do

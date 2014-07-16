@@ -14,6 +14,7 @@
 <h4>Activities:</h4>
 <% @activities.each do |activity| %>
 	<div class="row">
+
 		<span class="col-md-2 col-md-ofset-1">
 			Title: 
 		</span>
@@ -21,14 +22,32 @@
 			<%= activity.title %>
 		</span>
 	</div>
+
 	<div class="row">
 		<span class="col-md-2 col-md-ofset-1">
 			Description: 
 		</span>
+
 		<span class="col-md-7 col-md-offset-1">
 			<%= activity.description %>
 		</span>
-	</div>
+
+		<span class="col-md-7 col-md-offset-1">
+			<%= activity.address %>
+		</span>
+
+		<%= image_tag activity.avatar.url%> 
+		<% if activity.video %>
+			<iframe width="200" height="200" src="<%=activity.video%>" frameborder="0" allowfullscreen>
+			</iframe> 
+
+		<%end%>
+		<!-- <video width="320" height="240" controls="controls">
+      
+            <source src="activity.video"/>
+ 
+         </video> -->
+    </div>
 	
 	<div>
 		<% if current_user %>
@@ -46,10 +65,11 @@
 	          <% end %>	
 	 <% end %>
 	    <!-- <button id= "comment-button" class="comment-button btn btn-default">Comment</button> -->
-	    <button class="comment-button btn btn-default">Show Comments</button>
+<!-- 	    <button class="comment-button btn btn-default">Show Comments</button>
 	    
 	    <p class="text-danger"><%= activity.comments.count %>comments</p>
 	</div>
 
 	
 <% end %>
+ -->

@@ -10,7 +10,7 @@ class ActivitiesController < ApplicationController
 	end
 
 	# def index
-	# @activity= Activity.find(:all)	
+	# @activity= Activity.find(:all)
  #    end
 
 	def create
@@ -18,12 +18,12 @@ class ActivitiesController < ApplicationController
  
         @activity.save
         redirect_to root_path
-             # render index
+             # render video
 	end
 
 	private
 
     def article_params
-    params.require(:activity).permit(:title, :description)
+    params.require(:activity).permit(:title, :description , :avatar, :video, :address)
   end
 end
