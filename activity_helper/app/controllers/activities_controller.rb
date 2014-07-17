@@ -9,11 +9,19 @@ class ActivitiesController < ApplicationController
 		end
 	end
 
-	# def index
-	# @activity= Activity.find(:all)
- #    end
+	def edit
+		@activity= Activity.find(params[:id])
+ 	end
 
- 	
+ 	def update
+ 		@activity = Activity.find(params[:id])
+ 
+       if @activity.update(article_params)
+        redirect_to root_path
+         else
+    		render 'edit'
+	   end
+	end   
 
 	def create
 		@activity = Activity.new(article_params)
@@ -23,6 +31,9 @@ class ActivitiesController < ApplicationController
         redirect_to root_path
              # render video
 	end
+	# def index
+	# @activity= Activity.find(:all)
+    #  end
 
 	private
 

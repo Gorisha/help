@@ -30,6 +30,7 @@
 				<span class="col-md-7 col-md-offset-1">
 			    	<%= activity.description %>
 		         </span>
+		        <p> <%= link_to "edit" , edit_user_activity_path(current_user , activity) %> </p>
 					<span class="col-md-2 col-md-offset-1">
 				  		Location
 					 </span>
@@ -83,7 +84,8 @@
 	function initialize() {
 	  var mapOptions = {
 	    zoom: 8,
-	    center: new google.maps.LatLng(-34.397, 150.644)
+	    // center: new google.maps.LatLng(-34.397, 150.644)
+	    center: new google.maps.LatLng(Activity.latitude , Activity.longitude)
 	  };
 
 	  var map = new google.maps.Map(document.getElementById('map-canvas'),
