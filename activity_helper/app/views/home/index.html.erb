@@ -12,64 +12,91 @@
 </div>
 
 <h4>Activities:</h4>
-<% @activities.each do |activity| %>
-	<div class="row">
+<% @activities.each do |activity| %> <hr>
+		<div class="row">
+			<span class="col-md-2 col-md-ofset-1">
+				       Title: 
+			</span>
+				  <span class="col-md-7 col-md-offset-1">
+					<%= activity.title %>
+				  </span>
+	    </div>
 
-		<span class="col-md-2 col-md-ofset-1">
-			Title: 
-		</span>
-		<span class="col-md-7 col-md-offset-1">
-			<%= activity.title %>
-		</span>
-	</div>
 
-	<div class="row">
-		<span class="col-md-2 col-md-ofset-1">
-			Description: 
-		</span>
+		<div class="row">
+			<span class="col-md-2 col-md-ofset-1">
+			      Description: 
+		      </span>
+				<span class="col-md-7 col-md-offset-1">
+			    	<%= activity.description %>
+		         </span>
+					<span class="col-md-2 col-md-offset-1">
+				  		Location
+					 </span>
+						<span class= "col-md-7 col-md-offset-1">	  		
+							<%= activity.address %>
+							<%= activity.latitude %>
+							<%= activity.longitude %>
+						</span>
+					        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{activity.latitude}%2C#{activity.longitude}" %>
 
-		<span class="col-md-7 col-md-offset-1">
-			<%= activity.description %>
-		</span>
+		           <%= image_tag activity.avatar.url%> 
+		             <% if activity.video %>
+			             <!-- <iframe width="200" height="200" src="<%=activity.video%>" frameborder="0" allowfullscreen>
+			                                 </iframe>   -->
+			               <% id = extract_video_id(activity.video) %>
 
-		<span class="col-md-7 col-md-offset-1">
-			<%= activity.address %>
-		</span>
-
-		<%= image_tag activity.avatar.url%> 
-		<% if activity.video %>
-			<iframe width="200" height="200" src="<%=activity.video%>" frameborder="0" allowfullscreen>
-			</iframe> 
-
-		<%end%>
+			               <% if id %>
+                              <iframe width="200" height="200" src="http://www.youtube.com/embed/<%=id%>" frameborder="0" allowfullscreen></iframe>
+                            <% end %>
+                     <%end%>
 		<!-- <video width="320" height="240" controls="controls">
       
             <source src="activity.video"/>
  
          </video> -->
-    </div>
+        </div>
 	
-	<div>
-		<% if current_user %>
-			<%= form_for :comment , url: user_activity_comments_path(current_user , activity), html: {class: "comment-form"} do |f| %>
-				<p>	<%= f.label :comment %> </p>
-				<p>	<%= f.text_field :body, autocomplete: false, class: "form-control" %> </p>
-				<p> <%= f.submit "Save", class: "btn btn-primary" %> </p>
-
-				<br>
-	<b class="text-primary">Comments:</b>
-	<% activity.comments.each do |c| %>
-		<p class="text-danger"><%= c.body %></p>  
-		
-	     <% end %>
-	          <% end %>	
+	    <div>
+			<% if current_user %>
+				<button class= "comment-button btn btn-primary">view comments</button>
+				<%= form_for :comment , url: user_activity_comments_path(current_user , activity), html: {class: "comment-form"} do |f| %>
+					
+					<p>	<%= f.label :comment %> </p>
+					<p>	<%= f.text_field :body, autocomplete: false, class: "form-control" %> </p>
+					<p> <%= f.submit "Save", class: "btn btn-primary" %> </p><br>
+				
+				<b class="text-primary">Comments:</b>
+				<% activity.comments.each do |c| %>
+					<p class="text-danger"><%= c.body %></p>  
+	              <%end%>
+				<%end%>
+			<% end %>	
+		</div>		
 	 <% end %>
-	    <!-- <button id= "comment-button" class="comment-button btn btn-default">Comment</button> -->
-<!-- 	    <button class="comment-button btn btn-default">Show Comments</button>
-	    
-	    <p class="text-danger"><%= activity.comments.count %>comments</p>
-	</div>
 
-	
-<% end %>
- -->
+
+
+<div id="map-canvas"></div>
+
+<script type="text/javascript">
+	function initialize() {
+	  var mapOptions = {
+	    zoom: 8,
+	    center: new google.maps.LatLng(-34.397, 150.644)
+	  };
+
+	  var map = new google.maps.Map(document.getElementById('map-canvas'),
+	      mapOptions);
+	}
+
+	function loadScript() {
+	  var script = document.createElement('script');
+	  script.type = 'text/javascript';
+	  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&' +
+	      'callback=initialize';
+	  document.body.appendChild(script);
+	}
+
+	window.onload = loadScript;
+</script>

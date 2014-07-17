@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140716050458) do
+ActiveRecord::Schema.define(version: 20140716053335) do
 
   create_table "activities", force: true do |t|
     t.string   "title"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20140716050458) do
     t.string   "avatar"
     t.string   "video"
     t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "comments", force: true do |t|

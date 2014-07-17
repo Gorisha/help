@@ -13,8 +13,11 @@ class ActivitiesController < ApplicationController
 	# @activity= Activity.find(:all)
  #    end
 
+ 	
+
 	def create
 		@activity = Activity.new(article_params)
+		# @activity.latitude = params[:activity][:latitude]
  
         @activity.save
         redirect_to root_path
@@ -24,6 +27,6 @@ class ActivitiesController < ApplicationController
 	private
 
     def article_params
-    params.require(:activity).permit(:title, :description , :avatar, :video, :address)
+    params.require(:activity).permit(:title, :description , :avatar, :video, :address , :latitude , :longitude)
   end
 end

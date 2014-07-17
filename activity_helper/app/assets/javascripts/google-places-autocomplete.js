@@ -29,3 +29,19 @@ function checkAddressField()
 		initialize();
 	}
 }
+// <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+// <script type="text/javascript">
+//   var lat = <%= @activities.latitude %>, 
+//       lon = <%= @.longitude %>,
+//       map;
+//   function initialize() {
+//     var myOptions = {
+//       center: new google.maps.LatLng(lat, lon)
+//     };
+//     map = new google.maps.Map(document.getElementById('map_canvas'),
+//         myOptions);
+//   }
+
+//   google.maps.event.addDomListener(window, 'load', initialize);
+// </script>
+// <div id="map_canvas"></div>
