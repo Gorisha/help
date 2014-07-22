@@ -1,0 +1,9 @@
+<div class="container">
+	<ul>
+		<% @users.each_with_index do |u| %>
+			<% if u != current_user %>
+				<li><%= link_to u.email, u %></li>
+			<% end %>
+		<% end %>
+	</ul>
+</div>

@@ -2,7 +2,7 @@ $(document).ready(function(){
 	checkAddressField()
 });
 
-function initialize() {
+function initialize_autocomplete() {
 	var mapOptions = {
        types: ['geocode']
 	};
@@ -26,7 +26,7 @@ function checkAddressField()
 {
 	if($('.add-location').length)
 	{
-		initialize();
+		initialize_autocomplete();
 	}
 }
 // <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>

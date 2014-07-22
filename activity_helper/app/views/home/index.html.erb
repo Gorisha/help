@@ -12,25 +12,23 @@
 </div>
 
 <h4>Activities:</h4>
+<b>Name:</b>
+
 <% @activities.each do |activity| %> <hr>
+
 		<div class="row">
 			<span class="col-md-2 col-md-ofset-1">
 				       Title: 
 			</span>
 				  <span class="col-md-7 col-md-offset-1">
-					<%= activity.title %>
-				  </span>
-	    </div>
-
-
-		<div class="row">
+					      <%= best_in_place  activity, :title, :path => user_activity_path(current_user, activity) %>
+					 </span>
 			<span class="col-md-2 col-md-ofset-1">
 			      Description: 
 		      </span>
 				<span class="col-md-7 col-md-offset-1">
-			    	<%= activity.description %>
+			    	<%= best_in_place  activity, :description, :path => user_activity_path(current_user, activity) %>
 		         </span>
-		        <p> <%= link_to "edit" , edit_user_activity_path(current_user , activity) %> </p>
 					<span class="col-md-2 col-md-offset-1">
 				  		Location
 					 </span>
@@ -40,6 +38,12 @@
 							<%= activity.longitude %>
 						</span>
 					        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{activity.latitude}%2C#{activity.longitude}" %>
+
+							 <!-- <div class="gmaps">
+							      hidden_field_tag llat, activity.latitude 
+							      hidden_field_tag llng, activity.longitude 
+							     <div class="map-canvas"></div>    
+							 </div> -->
 
 		           <%= image_tag activity.avatar.url%> 
 		             <% if activity.video %>
@@ -67,38 +71,15 @@
 					<p>	<%= f.text_field :body, autocomplete: false, class: "form-control" %> </p>
 					<p> <%= f.submit "Save", class: "btn btn-primary" %> </p><br>
 				
-				<b class="text-primary">Comments:</b>
-				<% activity.comments.each do |c| %>
-					<p class="text-danger"><%= c.body %></p>  
-	              <%end%>
-				<%end%>
+					<b class="text-primary">Comments:</b>
+					<% activity.comments.each do |c| %>
+						<p class="text-danger"><%= c.body %></p>  
+		            <%end%>
+				<% end %>
 			<% end %>	
 		</div>		
-	 <% end %>
+	<% end %>
 
 
 
-<div id="map-canvas"></div>
 
-<script type="text/javascript">
-	function initialize() {
-	  var mapOptions = {
-	    zoom: 8,
-	    // center: new google.maps.LatLng(-34.397, 150.644)
-	    center: new google.maps.LatLng(Activity.latitude , Activity.longitude)
-	  };
-
-	  var map = new google.maps.Map(document.getElementById('map-canvas'),
-	      mapOptions);
-	}
-
-	function loadScript() {
-	  var script = document.createElement('script');
-	  script.type = 'text/javascript';
-	  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&' +
-	      'callback=initialize';
-	  document.body.appendChild(script);
-	}
-
-	window.onload = loadScript;
-</script>

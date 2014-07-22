@@ -1,5 +1,9 @@
 class ActivitiesController < ApplicationController
+
+	respond_to :html, :json, :js
+
 	before_filter :authenticate_user!
+	
 
 	def new
 		@user= User.find(params[:user_id])
@@ -10,21 +14,29 @@ class ActivitiesController < ApplicationController
 	end
 
 	def edit
-		@activity= Activity.find(params[:id])
+		@activity= current_user.activities.find(params[:id])
  	end
 
+
  	def update
- 		@activity = Activity.find(params[:id])
- 
-       if @activity.update(article_params)
-        redirect_to root_path
-         else
+ 		@activity = current_user.activities.find(params[:id])
+        if @activity.update_attributes(article_params)
+        	respond_with do |format|
+        		format.js do
+        			render json: true
+        		end
+        		format.html do
+        			redirect_to root_path
+        		end
+        	end	
+        else
     		render 'edit'
 	   end
 	end   
 
 	def create
-		@activity = Activity.new(article_params)
+		@user=User.find(params[:user_id])
+		@activity = @user.activities.new(article_params)
 		# @activity.latitude = params[:activity][:latitude]
  
         @activity.save
@@ -38,6 +50,6 @@ class ActivitiesController < ApplicationController
 	private
 
     def article_params
-    params.require(:activity).permit(:title, :description , :avatar, :video, :address , :latitude , :longitude)
-  end
+    	params.require(:activity).permit(:title, :description , :avatar, :video, :address , :latitude , :longitude)
+  	end
 end
