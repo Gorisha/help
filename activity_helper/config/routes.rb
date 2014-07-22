@@ -6,6 +6,8 @@ ActivityHelper::Application.routes.draw do
     resources :activities do
       resources :comments
     end
-    resources :messages
+    resources :messages, only: [:new, :create]
   end
+  match "messages", to: "messages#messages", via: [:get]
 end
+ 
