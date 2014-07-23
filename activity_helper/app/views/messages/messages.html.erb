@@ -5,26 +5,34 @@
             <div class="panel panel-default">
 	              <% @messages.each do |u| %>
 				     <li>
-				     	<%= link_to "#{u.subject}(#{u.sender.email})", messages_path(id:u.id) %>
+
+				     	<%= link_to "#{u.subject}(#{u.sender.email})", messages_path(id:u.id ) %>
 				     	<span class="pull-right"><%= time_ago_in_words(u.created_at) %> ago.</span>
 				     </li>
 	              <% end %>
              </div>
-                
-                      <div class="panel panel-default">
-                       <% if @message %>
-	                	<b class="text-primary"><%= @message.subject %></b>
-	                	<p><%= @message.body %></p>
-	                	<% if @replies.any? %>
-	                		<% @replies.each do |r| %>
-	                			<b><%= r.sender.email %>: </b><%= r.text %>
-	                			<span><%= time_ago_in_words(r.created_at) %> ago.</span>
-	                		<% end %>
-	                	<% end %>
-				<% end %>
-            </div>
         </div>
-                    </div>
-        </div>
+    </div>     
+  
+     <div class="col">
+       <div class= "col-sm-6">      
+         <div class="panel panel-default">
+            <% if @message %>
+	           <b class="text-primary"><%= @message.subject %></b>
+	           <p><%= @message.body %></p>
+	              <% if @replies.any? %>
+	                <% @replies.each do |r| %>
+	                   <b><%= r.sender.email %>: </b><%= r.text %>
+	                	<span><%= time_ago_in_words(r.created_at) %> ago.</span>
+	                <% end %>
+	               <% end %>
+	               <button class= "comment-button btn btn-primary">reply</button>
+				    <%= form_for :reply , url: user_message_replies_path(current_user , @message) do |reply|%>
+					<p>	<%= reply.text_field :text, autocomplete: false, class: "form-control" %> </p>
+					<p> <%= reply.submit "Save", class: "btn btn-primary" %> </p><br>
+			     <% end %>
+			<%end%>     
+         </div>
+       </div>
+     </div>
    </div>
-</div>
