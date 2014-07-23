@@ -23,11 +23,18 @@ class MessagesController < ApplicationController
    end
 
    def messages
-   	
-   end
+    @messages = current_user.messages_received + current_user.messages_sent
+    @messages.sort!{|x,y| x.created_at<=>y.created_at}
+    if params[:id]
+      @message = Message.find(params[:id])
+      if @message.sender == current_user || @message.receiver == current_user
+        @replies = @message.replies
+      end
+    end
+  end
 
    private
-       def msg_params
-        params.require(:message).permit(:body)
-      end
+    def msg_params
+      params.require(:message).permit(:body)
+    end
 end

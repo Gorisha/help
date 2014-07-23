@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+   <div class="panel-heading">Message Inbox</div>
+    <div class="col">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+	              <% @messages.each do |u| %>
+				     <li>
+				     	<%= link_to "#{u.subject}(#{u.sender.email})", messages_path(id:u.id) %>
+				     	<span class="pull-right"><%= time_ago_in_words(u.created_at) %> ago.</span>
+				     </li>
+	              <% end %>
+             </div>
+                
+                      <div class="panel panel-default">
+                       <% if @message %>
+	                	<b class="text-primary"><%= @message.subject %></b>
+	                	<p><%= @message.body %></p>
+	                	<% if @replies.any? %>
+	                		<% @replies.each do |r| %>
+	                			<b><%= r.sender.email %>: </b><%= r.text %>
+	                			<span><%= time_ago_in_words(r.created_at) %> ago.</span>
+	                		<% end %>
+	                	<% end %>
+				<% end %>
+            </div>
+        </div>
+                    </div>
+        </div>
+   </div>
+</div>

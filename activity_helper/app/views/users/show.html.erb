@@ -1,15 +1,12 @@
 <div class="container">
 	<div class="row card">
 		<div class="col-md-3">
-			<h1>
-				<%= gravatar_for @user %>
-				
-			</h1>
-			
-			      email:  <%= @user.email %>
-			
+			<h1><%= gravatar_for @user %></h1>
+			email:  <%= @user.email %>
 		</div>
 	</div>
 	<div class= "row card">
 	<%= link_to "Send Message To User", new_user_message_path(@user), class: "btn btn-success" if @user != current_user %>
-</div>		
+	<%= link_to "view Messages" , messages_path , class: "btn btn-success"     if @user == current_user %>
+  </div>
+</div>  		
