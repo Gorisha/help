@@ -3,7 +3,9 @@
 		<div class="col-md-6">
 			<%= form_for :message , url: user_messages_path(@user) do |f| %>
 			  	<div class="form-group">
-			  		<%= f.label :message_body %>
+			  		<%= f.label :subject_body %>
+			    	<%= f.text_field :subject, autocomplete: false, class: "form-control" %>
+			    	<%= f.label :message_body %>
 			    	<%= f.text_field :body, autocomplete: false, class: "form-control" %>
 			  	</div>
 				
